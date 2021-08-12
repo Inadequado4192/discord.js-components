@@ -1,13 +1,13 @@
 {
     "name": "discord.js-components",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Makes it easier to work with the message components.",
-    "main": "core/index.ts",
+    "main": "core/index.js",
     "scripts": {
         "compile": "tsc -p ./tsconfig.json",
         "start": "node ./test/index.js",
         "dev": "npm run compile && npm start",
-        "save": "npm run compile && git add . && git commit -m \"1.0.0\" && git push -u origin main && npm publish"
+        "save": "npm run compile && git add . && git commit -m \"1.0.1\" && git push -u origin main && npm publish"
     },
     "keywords": [
         "discord",
