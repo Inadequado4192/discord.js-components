@@ -10,10 +10,10 @@
         "save": "npm run compile && git add . && git commit -m \"1.0.0\" && git push -u origin main && npm publish"
     },
     "keywords": [
-        "discord.js",
-        "discord.js components",
-        "discord.js button",
-        "discord.js menu"
+        "discord",
+        "discord components",
+        "discord button",
+        "discord menu"
     ],
     "author": "Inadequado#4192",
     "license": "ISC",
