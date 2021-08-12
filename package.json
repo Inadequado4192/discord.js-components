@@ -1,0 +1,24 @@
+{
+    "name": "discord.js-components",
+    "version": "1.0.0-beta",
+    "description": "Makes it easier to work with the message components.",
+    "main": "core/index.ts",
+    "type": "module",
+    "scripts": {
+        "compile": "tsc -p ./tsconfig.json",
+        "start": "node ./test/index.js",
+        "dev": "npm run compile && npm start",
+        "save": "git add . && git commit -m \"1.0.0-beta\" && git push -u origin main"
+    },
+    "keywords": [
+        "discord.js",
+        "discord.js components",
+        "discord.js button",
+        "discord.js menu"
+    ],
+    "author": "Vlad",
+    "license": "ISC",
+    "dependencies": {
+        "discord.js": "^13.0.1"
+    }
+}
