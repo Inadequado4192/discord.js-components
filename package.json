@@ -16,7 +16,7 @@
         "discord.js button",
         "discord.js menu"
     ],
-    "author": "Vlad",
+    "author": "Inadequado#4192",
     "license": "ISC",
     "dependencies": {
         "discord.js": "^13.0.1"
