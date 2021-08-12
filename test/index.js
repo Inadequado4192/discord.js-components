@@ -1,4 +1,4 @@
-import { AddComponents } from "../core/index.js";
+const { AddComponents } = require("../core/index.js");
 
 console.log(AddComponents({
     type: "BUTTON",

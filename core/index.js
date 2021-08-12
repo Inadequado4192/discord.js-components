@@ -1,5 +1,8 @@
-import { Message } from "discord.js";
-export function AddComponents(...options) {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ComponentCollector = exports.AddComponents = void 0;
+const discord_js_1 = require("discord.js");
+function AddComponents(...options) {
     return options.map(option => ({
         type: "ACTION_ROW",
         components: (() => {
@@ -34,8 +37,9 @@ export function AddComponents(...options) {
         })()
     }));
 }
-export async function ComponentCollector(msg, options) {
-    let m = msg instanceof Message ? msg : await msg.fetchReply();
+exports.AddComponents = AddComponents;
+async function ComponentCollector(msg, options) {
+    let m = msg instanceof discord_js_1.Message ? msg : await msg.fetchReply();
     const collector = m.createMessageComponentCollector({ filter: i => options.targets === "everyone" || options.targets.includes(i.user.id), time: options.time });
     let answer = false;
     collector.on("collect", async (i) => {
@@ -50,13 +54,14 @@ export async function ComponentCollector(msg, options) {
     });
     collector.on("end", async (collected) => {
         if (options.removeComponents === true || options.removeComponents === undefined)
-            await (msg instanceof Message ? msg.edit : msg.editReply).apply(msg, [{ components: [] }]);
+            await (msg instanceof discord_js_1.Message ? msg.edit : msg.editReply).apply(msg, [{ components: [] }]);
         if (options.end)
             await options.end(collected);
         if (answer === false && options.timeIsUp)
             await options.timeIsUp(collected);
         if (options.delete === true)
-            await (msg instanceof Message ? msg.delete : msg.deleteReply).apply(msg);
+            await (msg instanceof discord_js_1.Message ? msg.delete : msg.deleteReply).apply(msg);
     });
 }
+exports.ComponentCollector = ComponentCollector;
 //# sourceMappingURL=index.js.map
