@@ -45,7 +45,7 @@ export function AddComponents(...options: (ComponentButton | ComponentMenu)[]): 
     }));
 
 }
-type ComponentCollectorOptions = {
+export type ComponentCollectorOptions = {
     /** Who can answer the components. */
     targets: Snowflake[] | "everyone",
     /** Answer collection time. */
