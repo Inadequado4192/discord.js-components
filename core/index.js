@@ -50,7 +50,7 @@ function ComponentCollector(msg, options) {
                     await options.button[i.customId](i);
                 if (i.isSelectMenu() && options.menu?.[i.customId])
                     await options.menu[i.customId](i);
-                await i.deferUpdate();
+                await i.deferUpdate().catch(f);
                 if (options.oneAnswer === true)
                     collector.stop();
             }
@@ -61,7 +61,7 @@ function ComponentCollector(msg, options) {
         collector.on("end", async (collected) => {
             try {
                 if (options.removeComponents === true || options.removeComponents === undefined)
-                    await (msg instanceof discord_js_1.Message ? msg.edit : msg.editReply).apply(msg, [{ components: [] }]);
+                    await (msg instanceof discord_js_1.Message ? msg.edit : msg.editReply).apply(msg, [{ components: [] }]).catch(f);
                 if (options.end)
                     await options.end(collected);
                 if (answer === false && options.timeIsUp)

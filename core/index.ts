@@ -85,7 +85,7 @@ export function ComponentCollector<T extends Message | CommandInteraction>(msg: 
                 answer = true;
                 if (i.isButton() && options.button?.[i.customId]) await options.button[i.customId](i);
                 if (i.isSelectMenu() && options.menu?.[i.customId]) await options.menu[i.customId](i);
-                await i.deferUpdate();
+                await i.deferUpdate().catch(f);
                 if (options.oneAnswer === true) collector.stop();
             } catch (error) { f(error); }
         });
@@ -93,7 +93,7 @@ export function ComponentCollector<T extends Message | CommandInteraction>(msg: 
         collector.on("end", async collected => {
             try {
                 if (options.removeComponents === true || options.removeComponents === undefined)
-                    await (<any>(msg instanceof Message ? msg.edit : msg.editReply)).apply(msg, [{ components: [] }]);
+                    await (<any>(msg instanceof Message ? msg.edit : msg.editReply)).apply(msg, [{ components: [] }]).catch(f);
                 if (options.end) await options.end(collected);
                 if (answer === false && options.timeIsUp) await options.timeIsUp(collected);
                 if (options.delete === true) await (<any>(msg instanceof Message ? msg.delete : msg.deleteReply)).apply(msg);
