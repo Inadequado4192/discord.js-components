@@ -74,26 +74,31 @@ export type ComponentCollectorOptions = {
     /** Callback for menu. */
     menu?: { [key: string]: (i: SelectMenuInteraction) => void; }
 }
-export async function ComponentCollector(msg: Message | CommandInteraction, options: ComponentCollectorOptions) {
-    let m = msg instanceof Message ? msg : await msg.fetchReply() as Message;
-    const collector = m.createMessageComponentCollector({ filter: i => options.targets === "everyone" || options.targets.includes(i.user.id), time: options.time });
+export function ComponentCollector<T extends Message | CommandInteraction>(msg: T, options: ComponentCollectorOptions) {
+    return new Promise<T>(async (t, f) => {
+        let m = msg instanceof Message ? msg : await msg.fetchReply() as Message;
+        const collector = m.createMessageComponentCollector({ filter: i => options.targets === "everyone" || options.targets.includes(i.user.id), time: options.time });
 
-    let answer = false;
-    collector.on("collect", async i => {
-        answer = true;
-        if (i.isButton() && options.button?.[i.customId]) await options.button[i.customId](i);
-        if (i.isSelectMenu() && options.menu?.[i.customId]) await options.menu[i.customId](i);
-        await i.deferUpdate();
-        if (options.oneAnswer === true) collector.stop();
-    });
+        let answer = false;
+        collector.on("collect", async i => {
+            try {
+                answer = true;
+                if (i.isButton() && options.button?.[i.customId]) await options.button[i.customId](i);
+                if (i.isSelectMenu() && options.menu?.[i.customId]) await options.menu[i.customId](i);
+                await i.deferUpdate();
+                if (options.oneAnswer === true) collector.stop();
+            } catch (error) { f(error); }
+        });
 
-    collector.on("end", async collected => {
-        // try {
-        if (options.removeComponents === true || options.removeComponents === undefined)
-            await (<any>(msg instanceof Message ? msg.edit : msg.editReply)).apply(msg, [{ components: [] }]);
-        if (options.end) await options.end(collected);
-        if (answer === false && options.timeIsUp) await options.timeIsUp(collected);
-        if (options.delete === true) await (<any>(msg instanceof Message ? msg.delete : msg.deleteReply)).apply(msg);
-        // } catch (error) { if (enabledErrors) throw error; }
+        collector.on("end", async collected => {
+            try {
+                if (options.removeComponents === true || options.removeComponents === undefined)
+                    await (<any>(msg instanceof Message ? msg.edit : msg.editReply)).apply(msg, [{ components: [] }]);
+                if (options.end) await options.end(collected);
+                if (answer === false && options.timeIsUp) await options.timeIsUp(collected);
+                if (options.delete === true) await (<any>(msg instanceof Message ? msg.delete : msg.deleteReply)).apply(msg);
+            } catch (error) { f(error); }
+        });
+        t(msg);
     });
 }
