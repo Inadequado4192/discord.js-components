@@ -65,8 +65,6 @@ interaction.reply({
 > **Note**.
 > The `customId` key must be specified for the button and it must be **unique**.
 
-### To respond to buttons or menus, you need the `ComponentCollector` function. You can find more information about it [below](#componentcollector).
-
 &ensp;
 
 ---
@@ -100,65 +98,3 @@ AddComponents({
 ```
 #### Result
 ![Example #1](https://cdn.discordapp.com/attachments/543096648046346241/875353189094936576/unknown.png)
-
-## `ComponentCollector`
-```ts
-ComponentCollector(msg: Message | CommandInteraction, options: ComponentCollectorOptions): Promise<void>
-```
-###### `ComponentCollectorOptions`
-```ts
-    /** Who can answer the components. */
-targets: Snowflake[] | "everyone",
-
-    /** Answer collection time. */
-time: number,
-
-    /** No response will be received after the collection time has elapsed. ("end" will still be called). */
-timeIsUp?: (collected: Collection<string, MessageComponentInteraction>) => void,
-
-    /** The message collection time has expired. */
-end?: (collected: Collection<string, MessageComponentInteraction>) => void,
-
-    /** Do I delete the message about it after the collection is complete?
-     * 
-     * Default: false
-    */
-delete?: boolean,
-
-    /** Remove the components after the collection is complete?
-     * 
-     * Default: true
-    */
-removeComponents?: boolean,
-
-    /** After the first response, message collection will be discontinued.
-     * 
-     * Default: false
-    */
-oneAnswer?: boolean,
-
-    /** Callback for buttons. */
-button?: { [key: string]: (i: ButtonInteraction) => void; },
-
-    /** Callback for menu. */
-menu?: { [key: string]: (i: SelectMenuInteraction) => void; }
-```
-### Example
-```js
-ComponentCollector(interaction /* or message */, {
-    targets: [author.id],
-    time: 10000,
-    button: {
-        "1": () => console.log("1"),
-        "2": () => console.log("2")
-    },
-    menu: {
-        "m1": () => console.log("m1")
-    },
-    timeIsUp: () => msg.edit("Time is up!"),
-    end: () => msg.edit("End"),
-    delete: false,
-    oneAnswer: true,
-    removeComponents: true
-});
-```
