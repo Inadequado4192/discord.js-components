@@ -1,4 +1,22 @@
-[![npm Package](https://img.shields.io/badge/npm-v1.0.5-blue?style=for-the-badge&logo=appveyor)](https://www.npmjs.org/package/discord.js-components) [![License](https://img.shields.io/badge/license-ISC-green?style=for-the-badge&logo=appveyor)](https://github.com/Inadequado4192/discord.js-components/blob/master/LICENSE) [![Language](https://img.shields.io/badge/Language-JS_%2FTS-yellowgreen?style=for-the-badge&logo=appveyor)](https://www.npmjs.com/package/discord.js-components)
+<div align="center">
+    <img alt="Version" src="https://img.shields.io/github/package-json/v/Inadequado4192/discord.js-components?style=for-the-badge&logo=appveyor" />
+    <br>
+    <img alt="Repo size" src="https://img.shields.io/github/repo-size/Inadequado4192/discord.js-components?style=for-the-badge&logo=appveyor" />
+    <a href="https://github.com/Inadequado4192/discord.js-components/blob/main/LICENSE">
+    <img alt="LICENSE" src="https://img.shields.io/github/license/Inadequado4192/discord.js-components?style=for-the-badge&logo=appveyor" />
+    </a>
+    <img alt="LICENSE" src="https://img.shields.io/github/languages/top/Inadequado4192/discord.js-components?style=for-the-badge&logo=appveyor" />
+    </a>
+    <br>
+    <a href="https://github.com/Inadequado4192/discord.js-components/issues">
+        <img alt="GitHub issues" src="https://img.shields.io/github/issues/Inadequado4192/discord.js-components?style=for-the-badge&logo=appveyor">
+    </a>
+    <a href="https://github.com/Inadequado4192/discord.js-components/stargazers">
+        <img alt="GitHub stars" src="https://img.shields.io/github/stars/Inadequado4192/discord.js-components?style=for-the-badge&logo=appveyor">
+    </a>
+</div>
+
+
 
 > Helpful Links.
 > [Discord Developers](https://discord.com/developers/docs/interactions/message-components), [Buttons](https://discordjs.guide/interactions/buttons.html#component-collectors), [Menus](https://discordjs.guide/interactions/select-menus.html#component-collectors)
@@ -24,7 +42,7 @@ interaction.reply({
         type: "BUTTON",
         options: [{
             customId: "1",
-            style: "DANGER",
+            style: ButtonStyle.Success,
             label: "Button #1"
         }, {
             customId: "2"
@@ -74,7 +92,7 @@ interaction.reply({
 # Documentation
 ## `AddComponents`
 ```ts
-AddComponents(...options: (ComponentButton | ComponentMenu)[]): (MessageActionRow | MessageActionRowOptions)[];
+addComponents(...components: (Menu | Button)[]): ActionRowBuilder<Builder>[];
 ```
 
 ### Example
@@ -84,14 +102,14 @@ AddComponents({
     type: "BUTTON",
     options: [{
         customId: "1",
-        style: "PRIMARY",
+        style: ButtonStyle.Primary,
         label: "Button #1"
     }],
 }, {
     type: "BUTTON",
     options: [{
         customId: "2",
-        style: "DANGER",
+        style: ButtonStyle.Danger,
         label: "Button #2"
     }],
 });

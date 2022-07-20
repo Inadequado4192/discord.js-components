@@ -1,37 +1,28 @@
-import { Client } from "discord.js";
-import { AddComponents } from "../core/index.js";
+import { ButtonStyle, TextChannel } from "discord.js";
+import { addComponents } from "../core/index.js";
 // const { Client } = require("discord.js");
 // const { AddComponents } = require("../core/index.js");
 
-let comp = AddComponents({
+let comp = addComponents({
     type: "BUTTON",
     options: [{
         customId: "1",
-        style: "PRIMARY",
+        style: ButtonStyle.Primary,
+        label: "Primary"
     }, {
         customId: "2",
-        style: "SECONDARY",
+        style: ButtonStyle.Success,
+        label: "Success"
     }],
 }, {
     type: "SELECT_MENU",
     options: {
         customId: "3",
         options: [{
-            label: "t", value: "T"
+            label: "t",
+            value: "T"
         }]
     }
 });
 
-console.log(JSON.stringify(comp, null, "    "));
-
-(() => {
-    if (1 == 1) return;
-
-
-    let client = new Client({ intents: [] });
-    client.channels.fetch("").then(c => {
-        if (c?.isText()) c.send({
-            components: comp
-        })
-    });
-})();
+({ send() { console.log(arguments) } } as unknown as TextChannel).send({ components: comp })

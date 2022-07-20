@@ -1,6 +1,6 @@
 {
     "name": "discord.js-components",
-    "version": "13.7.0",
+    "version": "14.0.3",
     "description": "Makes it easier to work with the message components.",
     "main": "core/index.js",
     "scripts": {
@@ -16,8 +16,7 @@
     "author": "Inadequado#4192",
     "license": "ISC",
     "dependencies": {
-        "discord.js": "^13.7.0",
-        "typescript": "^4.3.5"
+        "discord.js": "^14.0.3"
     },
     "homepage": "https://github.com/Inadequado4192/discord.js-components"
 }
