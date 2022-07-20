@@ -124,11 +124,3 @@ export function addComponents(...components: (Menu | Button)[]) {
         return new ActionRowBuilder(c);
     })
 }
-
-({} as Discord.TextChannel).send({
-    components: addComponents({
-        type: "BUTTON",
-        options: []
-    })
-})
-
