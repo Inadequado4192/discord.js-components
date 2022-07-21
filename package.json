@@ -1,6 +1,6 @@
 {
     "name": "discord.js-components",
-    "version": "14.0",
+    "version": "14.0.0",
     "description": "Makes it easier to work with the message components.",
     "main": "core/index.js",
     "scripts": {
