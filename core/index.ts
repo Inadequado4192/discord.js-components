@@ -1,6 +1,5 @@
 import * as Discord from "discord.js";
-type RestOrArray<T> = T[] | [T[]];
-
+import { RestOrArray } from "discord.js";
 
 
 

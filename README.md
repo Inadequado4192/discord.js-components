@@ -16,6 +16,9 @@
     </a>
 </div>
 
+> Supported versions of <u>discord.js</u>
+> * `discord.js-components@14.0.3`
+> <i>`14.0.0 - 14.0.3`</i>
 
 
 > Helpful Links.
